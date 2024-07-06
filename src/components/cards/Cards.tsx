@@ -1,6 +1,7 @@
 import Animal from '@interfaces/animal';
 import fetchApi from '@services/API/fetchApi';
 import React from 'react';
+import Card from './card/card';
 
 interface AnimalListState {
   animals: Animal[];
@@ -50,7 +51,9 @@ class Cards extends React.Component<
         <h1>Animal List</h1>
         <ul>
           {animals.map((animal, index) => (
-            <li key={index}>{animal.name}</li>
+            <li key={index}>
+              <Card animal={animal} />
+            </li>
           ))}
         </ul>
       </div>
