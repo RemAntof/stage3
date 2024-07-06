@@ -1,7 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
+const root = process.cwd();
+
 export default defineConfig({
-  plugins: [react()],
+  base: "/",
+  root,
+  plugins: [react(), tsconfigPaths()],
 });
