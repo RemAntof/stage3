@@ -1,5 +1,6 @@
 .searchButton {
   width: 30px;
   background-color: aqua;
-  color: black;
+  color: rgb(255, 255, 255);
+  margin: 20px 0 ;
 }
