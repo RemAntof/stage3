@@ -1,3 +1,5 @@
+
+import Cards from '@components/cards/Cards';
 import Search from '@components/search/Search';
 import React from 'react';
 
@@ -6,6 +8,7 @@ class MainPage extends React.Component {
     return (
       <div>
         <Search />
+        <Cards />
       </div>
     );
   }

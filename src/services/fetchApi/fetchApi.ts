@@ -1,8 +1,13 @@
+import {
+  BASE_URL,
+  DEFAULT_PAGE,
+  DEFAULT_PAGESIZE,
+} from '@constants/apiEndpoints';
 import Animal from '@interfaces/animal';
 
 const fetchApi = async (): Promise<Animal[]> => {
   const response = await fetch(
-    'https://stapi.co/api/v1/rest/animal/search?pageNumber=1&pageSize=20',
+    `${BASE_URL}?pageNumber=${DEFAULT_PAGE}&pageSize=${DEFAULT_PAGESIZE}`,
     {
       method: 'GET',
       headers: {
@@ -16,6 +21,6 @@ const fetchApi = async (): Promise<Animal[]> => {
   }
 
   const data = await response.json();
-  return data.animals; // Adjust according to the actual response structure
+  return data.animals;
 };
 export default fetchApi;
