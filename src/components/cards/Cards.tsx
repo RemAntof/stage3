@@ -1,5 +1,5 @@
 import Animal from '@interfaces/animal';
-import fetchApi from '@services/fetchApi/fetchApi';
+import fetchApi from '@services/API/fetchApi';
 import React from 'react';
 
 interface AnimalListState {

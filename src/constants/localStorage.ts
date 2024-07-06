@@ -1,1 +1,1 @@
-export const LOCAL_STORAGE_KEY = 'lastSearch'
+export const LOCAL_STORAGE_KEY = 'lastSearch';
