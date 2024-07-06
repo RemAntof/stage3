@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import * as ReactDOM from "react-dom/client";
 import "./index.css";
+import Clock from "@views/app/app";
+import React from "react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <Clock />
   </React.StrictMode>,
 );
