@@ -3,9 +3,9 @@ interface ClockState {
   date: Date;
 }
 
-class Clock extends React.Component<{}, ClockState> {
+class Clock extends React.Component<PropertyDescriptor,ClockState> {
   timerID: NodeJS.Timeout;
-  constructor(props: {}) {
+  constructor(props:PropertyDescriptor) {
     super(props);
     this.state = { date: new Date() };
   }
