@@ -2,11 +2,14 @@ import Animal from '@interfaces/animal';
 import fetchApi from '@services/API/fetchApi';
 import React from 'react';
 import Card from './card/card';
+import { LOCAL_STORAGE_KEY } from '@constants/localStorage';
+import getLocalStorage from '@services/localStorage/getlocalStorage';
 
 interface AnimalListState {
   animals: Animal[];
   loading: boolean;
   error: string | null;
+  storageData: string;
 }
 
 class Cards extends React.Component<
@@ -19,14 +22,17 @@ class Cards extends React.Component<
       animals: [],
       loading: true,
       error: null,
+      storageData: getLocalStorage(LOCAL_STORAGE_KEY),
     };
   }
   componentDidMount() {
     this.fetchAnimals();
   }
+
   fetchAnimals = async () => {
+    const { storageData } = this.state;
     try {
-      const animals = await fetchApi();
+      const animals = await fetchApi(storageData);
       this.setState({ animals, loading: false });
     } catch (error) {
       this.setState({

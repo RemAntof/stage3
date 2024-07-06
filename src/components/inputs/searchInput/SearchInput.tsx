@@ -1,16 +1,28 @@
 import styles from '@components/inputs/searchInput/searchInput.module.css';
 import React from 'react';
 
-class SearchInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface Props {
+  value: string;
+  onInputChange: (inputData: string) => void;
+}
+
+class SearchInput extends React.Component<Props> {
+  handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = event.target;
+    this.props.onInputChange(value);
+  };
+
   render() {
+    const { value } = this.props;
     return (
       <input
         className={styles.searchInput}
         placeholder="Search..."
-      ></input>
+        value={value}
+        onChange={this.handleInputChange}
+      />
     );
   }
 }

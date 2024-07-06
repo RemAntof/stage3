@@ -11,21 +11,23 @@ class Card extends React.Component<CardProp> {
       <div>
         <div>{this.props.animal.name}</div>
         <div>
-          '🌍'+
+          🌍Earth Animal:{' '}
           {booleanToYesNO(this.props.animal.earthAnimal)}
         </div>
         <div>
-          '🐛'+
+          🐛Earth Insect:{' '}
           {booleanToYesNO(this.props.animal.earthInsect)}
         </div>
         <div>
-          '🐦'+{booleanToYesNO(this.props.animal.avian)}
+          🐦Avian: {booleanToYesNO(this.props.animal.avian)}
         </div>
         <div>
-          '🐕‍🦺'+{booleanToYesNO(this.props.animal.canine)}
+          🐕‍🦺Canine:{' '}
+          {booleanToYesNO(this.props.animal.canine)}
         </div>
         <div>
-          '🐈'+{booleanToYesNO(this.props.animal.feline)}
+          🐈Feline:{' '}
+          {booleanToYesNO(this.props.animal.feline)}
         </div>
       </div>
     );

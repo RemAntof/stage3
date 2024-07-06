@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from '@components/buttons/searchButton/searchButton.module.css';
 
-class SearchButton extends React.Component {
-  render() {
-    return (
-      <button className={styles.SearchButton}></button>
-    );
-  }
+interface Props {
+  buttonType: 'submit' | 'button' | 'reset';
 }
+
+const SearchButton: React.FC<Props> = ({ buttonType }) => {
+  return <button type={buttonType}>Search</button>;
+};
+
 export default SearchButton;

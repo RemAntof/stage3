@@ -7,7 +7,7 @@ class MainPage extends React.Component {
     return (
       <div>
         <Search />
-        <Cards />
+        <Cards inherits={false} name={''} />
       </div>
     );
   }
