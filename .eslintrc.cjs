@@ -19,4 +19,12 @@ module.exports = {
     'no-unused-expressions': 'error',
     'no-inline-comments': 'error',
   },
+  overrides: [
+    {
+      files: ['vite.config.js'],
+      env: {
+        node: true,
+      },
+    },
+  ],
 };
