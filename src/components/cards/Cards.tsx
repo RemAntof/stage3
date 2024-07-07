@@ -2,6 +2,7 @@ import React from 'react';
 import Animal from '@interfaces/animal';
 import fetchApi from '@services/API/fetchApi';
 import Card from './card/card';
+import styles from '@components/cards/cards.module.css';
 
 interface AnimalListState {
   animals: Animal[];
@@ -59,7 +60,16 @@ class Cards extends React.Component<
     const { animals, loading, error } = this.state;
 
     if (loading) {
-      return <div>Loading...</div>;
+      return (
+        <div className={styles.spinnerBox}>
+          <div className={styles.configureBorder1}>
+            <div className={styles.configureCore}></div>
+          </div>
+          <div className={styles.configureBorder2}>
+            <div className={styles.configureCore}></div>
+          </div>
+        </div>
+      );
     }
 
     if (error) {
@@ -69,7 +79,7 @@ class Cards extends React.Component<
     return (
       <div>
         <h1>Animal List</h1>
-        <ul>
+        <ul className={styles.cardsBox}>
           {animals.map((animal, index) => (
             <li key={index}>
               <Card animal={animal} />
