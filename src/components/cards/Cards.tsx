@@ -3,6 +3,8 @@ import Animal from '@interfaces/animal';
 import fetchApi from '@services/API/fetchApi';
 import Card from './card/card';
 import styles from '@components/cards/cards.module.css';
+import { DEFAULT_PAGE } from '@constants/apiEndpoints';
+import Pagination from './pagination/pagination';
 
 interface Props {
   local: string;
@@ -12,6 +14,11 @@ const Cards: React.FC<Props> = ({ local }) => {
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [activePage, setActivePage] =
+    useState<number>(DEFAULT_PAGE);
+  const [totalPages, setTotalPages] =
+    useState<number>(DEFAULT_PAGE);
+
   const [storageData, setStorageData] =
     useState<string>(local);
 
@@ -20,9 +27,12 @@ const Cards: React.FC<Props> = ({ local }) => {
       setLoading(true);
       setError(null);
       try {
-        const animals = await fetchApi(storageData);
-        setAnimals(animals);
-        console.log(animals);
+        const responseData = await fetchApi(
+          storageData,
+          activePage
+        );
+        setAnimals(responseData.animals);
+        setTotalPages(responseData.page.totalPages);
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -30,7 +40,7 @@ const Cards: React.FC<Props> = ({ local }) => {
       }
     };
     fetchAnimals();
-  }, [storageData]);
+  }, [storageData, activePage]);
 
   useEffect(() => {
     setStorageData(local);
@@ -63,6 +73,11 @@ const Cards: React.FC<Props> = ({ local }) => {
           </li>
         ))}
       </ul>
+      <Pagination
+        activePage={activePage}
+        totalPages={totalPages}
+        setActivePage={setActivePage}
+      />
     </div>
   );
 };
