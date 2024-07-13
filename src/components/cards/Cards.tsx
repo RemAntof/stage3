@@ -1,94 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Animal from '@interfaces/animal';
 import fetchApi from '@services/API/fetchApi';
 import Card from './card/card';
 import styles from '@components/cards/cards.module.css';
 
-interface AnimalListState {
-  animals: Animal[];
-  loading: boolean;
-  error: string | null;
-  storageData: string;
-}
-
 interface Props {
   local: string;
 }
 
-class Cards extends React.Component<
-  Props,
-  AnimalListState
-> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      animals: [],
-      loading: true,
-      error: null,
-      storageData: props.local,
-    };
-  }
+const Cards: React.FC<Props> = ({ local }) => {
+  const [animals, setAnimals] = useState<Animal[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [storageData, setStorageData] =
+    useState<string>(local);
 
-  componentDidMount() {
-    this.fetchAnimals();
-  }
+  useEffect(() => {
+    fetchAnimals();
+  }, [storageData]);
 
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.local !== prevProps.local) {
-      this.setState(
-        { storageData: this.props.local },
-        this.fetchAnimals
-      );
-    }
-  }
+  useEffect(() => {
+    setStorageData(local);
+  }, [local]);
 
-  fetchAnimals = async () => {
-    const { storageData } = this.state;
-    this.setState({ loading: true, error: null });
+  const fetchAnimals = async () => {
+    setLoading(true);
+    setError(null);
     try {
       const animals = await fetchApi(storageData);
-      this.setState({ animals, loading: false });
+      setAnimals(animals);
+      setLoading(false);
     } catch (error) {
-      this.setState({
-        error: error.message,
-        loading: false,
-      });
+      setError(error.message);
+      setLoading(false);
     }
   };
 
-  render() {
-    const { animals, loading, error } = this.state;
-
-    if (loading) {
-      return (
-        <div className={styles.spinnerBox}>
-          <div className={styles.configureBorder1}>
-            <div className={styles.configureCore}></div>
-          </div>
-          <div className={styles.configureBorder2}>
-            <div className={styles.configureCore}></div>
-          </div>
-        </div>
-      );
-    }
-
-    if (error) {
-      return <div>Error: {error}</div>;
-    }
-
+  if (loading) {
     return (
-      <div>
-        <h1>Animal List</h1>
-        <ul className={styles.cardsBox}>
-          {animals.map((animal, index) => (
-            <li key={index}>
-              <Card animal={animal} />
-            </li>
-          ))}
-        </ul>
+      <div className={styles.spinnerBox}>
+        <div className={styles.configureBorder1}>
+          <div className={styles.configureCore}></div>
+        </div>
+        <div className={styles.configureBorder2}>
+          <div className={styles.configureCore}></div>
+        </div>
       </div>
     );
   }
-}
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div>
+      <h1>Animal List</h1>
+      <ul className={styles.cardsBox}>
+        {animals.map((animal, index) => (
+          <li key={index}>
+            <Card animal={animal} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Cards;
