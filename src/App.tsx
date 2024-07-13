@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
 import MainPage from '@views/mainPage/MainPage';
+import { Outlet } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <>
       <MainPage />
-    </div>
+      <div id="outlet">
+        <Outlet />
+      </div>
+    </>
   );
 };
 

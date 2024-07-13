@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Outlet } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Animal from '@interfaces/animal';
 import fetchApi from '@services/API/fetchApi';
 import Card from './card/card';
@@ -15,9 +15,7 @@ interface Props {
 
 const Cards: React.FC<Props> = ({ local }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageParam =
-    parseInt(searchParams.get('page')) - 1 || DEFAULT_PAGE;
-  const searchQuery = searchParams.get('search') || '';
+  const pageParam = parseInt(searchParams.get('page')) || 1;
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +23,6 @@ const Cards: React.FC<Props> = ({ local }) => {
     useState<number>(pageParam);
   const [totalPages, setTotalPages] =
     useState<number>(DEFAULT_PAGE);
-
   const [storageData, setStorageData] =
     useState<string>(local);
 
@@ -38,28 +35,36 @@ const Cards: React.FC<Props> = ({ local }) => {
   };
 
   useEffect(() => {
+    setSearchParams({
+      page: pageParam.toString(),
+      search: storageData,
+    });
+  }, [pageParam, storageData, setSearchParams]);
+
+  useEffect(() => {
     const fetchAnimals = async () => {
       setLoading(true);
       setError(null);
       try {
         const responseData = await fetchApi(
           storageData,
-          activePage
+          activePage - 1
         );
         setAnimals(responseData.animals);
         setTotalPages(responseData.page.totalPages);
-        setLoading(false);
       } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
       }
     };
+
     fetchAnimals();
   }, [storageData, activePage]);
 
   useEffect(() => {
-    setActivePage(DEFAULT_PAGE);
-  }, [searchQuery]);
+    setActivePage(pageParam - 1);
+  }, [pageParam]);
 
   useEffect(() => {
     setStorageData(local);
@@ -67,9 +72,7 @@ const Cards: React.FC<Props> = ({ local }) => {
 
   if (loading) return <Loader />;
 
-  if (error) {
-    return <ErrorPage />;
-  }
+  if (error) return <ErrorPage />;
 
   return (
     <div>
@@ -77,7 +80,11 @@ const Cards: React.FC<Props> = ({ local }) => {
       <ul className={styles.cardsBox}>
         {animals.map((animal) => (
           <li key={animal.uid}>
-            <Card animal={animal} />
+            <Link
+              to={`/?page=${activePage}&search=${storageData}/${animal.name}`}
+            >
+              <Card animal={animal} />
+            </Link>
           </li>
         ))}
       </ul>
@@ -86,9 +93,6 @@ const Cards: React.FC<Props> = ({ local }) => {
         totalPages={totalPages}
         setActivePage={updatePage}
       />
-      <div className={styles.detail}>
-        <Outlet />
-      </div>
     </div>
   );
 };
