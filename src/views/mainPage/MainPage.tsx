@@ -7,20 +7,19 @@ import TriggerErrorButton from '@components/buttons/triggerErrorButton/TriggerEr
 import useLocalStorage from 'src/hooks/useLocalStorage';
 
 const MainPage: React.FC = () => {
-  const [local, setLocal] = useLocalStorage(
+  const [localStorage, setLocalStorage] = useLocalStorage(
     LOCAL_STORAGE_KEY
   );
-
-  const updateLocal = (newLocal: string) => {
-    setLocal(newLocal);
-  };
 
   return (
     <div>
       <ErrorBoundary>
         <TriggerErrorButton />
-        <Search updateLocal={updateLocal} />
-        <Cards local={local} />
+        <Search
+          setLocalStorage={setLocalStorage}
+          localStorage={localStorage}
+        />
+        <Cards local={localStorage} />
       </ErrorBoundary>
     </div>
   );
