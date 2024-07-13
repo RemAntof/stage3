@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styles from '@components/search/search.module.css';
 import SearchInput from '@components/inputs/searchInput/SearchInput';
 import SearchButton from '@components/buttons/searchButton/SearchButton';
@@ -9,44 +9,34 @@ interface SearchProps {
   updateLocal: (newLocal: string) => void;
 }
 
-interface SearchState {
-  inputData: string;
-}
+const Search: React.FC<SearchProps> = ({ updateLocal }) => {
+  const [inputData, setInputData] = useState<string>(
+    getLocalStorage(LOCAL_STORAGE_KEY) || ''
+  );
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = {
-      inputData: getLocalStorage(LOCAL_STORAGE_KEY) || '',
-    };
-  }
-
-  handleInputChange = (inputData: string) => {
-    this.setState({ inputData });
+  const handleInputChange = (inputData: string) => {
+    setInputData(inputData);
   };
 
-  handleSubmit = (
+  const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    const { inputData } = this.state;
     localStorage.setItem(LOCAL_STORAGE_KEY, inputData);
-    this.props.updateLocal(inputData);
+    updateLocal(inputData);
   };
 
-  render() {
-    return (
-      <div className={styles.searchContainer}>
-        <form onSubmit={this.handleSubmit}>
-          <SearchInput
-            value={this.state.inputData}
-            onInputChange={this.handleInputChange}
-          />
-          <SearchButton buttonType="submit" />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.searchContainer}>
+      <form onSubmit={handleSubmit}>
+        <SearchInput
+          value={inputData}
+          onInputChange={handleInputChange}
+        />
+        <SearchButton buttonType="submit" />
+      </form>
+    </div>
+  );
+};
 
 export default Search;
