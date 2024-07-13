@@ -4,7 +4,7 @@ import Search from '@components/search/Search';
 import { LOCAL_STORAGE_KEY } from '@constants/localStorage';
 import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
 import TriggerErrorButton from '@components/buttons/triggerErrorButton/TriggerErrorButton';
-import useLocalStorage from 'src/hooks/useLocalStorage';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 const MainPage: React.FC = () => {
   const [localStorage, setLocalStorage] = useLocalStorage(
