@@ -5,7 +5,7 @@ interface ErrorResponse {
   message?: string;
 }
 
-export default function ErrorPage() {
+const ErrorPage: React.FC = () => {
   const error = useRouteError() as ErrorResponse;
   console.error(error);
 
@@ -18,4 +18,5 @@ export default function ErrorPage() {
       </p>
     </div>
   );
-}
+};
+export default ErrorPage;
