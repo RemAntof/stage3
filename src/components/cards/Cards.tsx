@@ -22,6 +22,7 @@ const Cards: React.FC<Props> = ({ local }) => {
       try {
         const animals = await fetchApi(storageData);
         setAnimals(animals);
+        console.log(animals);
         setLoading(false);
       } catch (error) {
         setError(error.message);
