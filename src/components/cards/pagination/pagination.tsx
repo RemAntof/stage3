@@ -4,9 +4,7 @@ import React from 'react';
 interface PaginationProps {
   activePage: number;
   totalPages: number;
-  setActivePage: React.Dispatch<
-    React.SetStateAction<number>
-  >;
+  setActivePage: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({

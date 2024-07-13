@@ -5,6 +5,7 @@ import { LOCAL_STORAGE_KEY } from '@constants/localStorage';
 import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
 import TriggerErrorButton from '@components/buttons/triggerErrorButton/TriggerErrorButton';
 import useLocalStorage from '@hooks/useLocalStorage';
+import { Outlet } from 'react-router-dom';
 
 const MainPage: React.FC = () => {
   const [localStorage, setLocalStorage] = useLocalStorage(
@@ -21,6 +22,9 @@ const MainPage: React.FC = () => {
         />
         <Cards local={localStorage} />
       </ErrorBoundary>
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 };
