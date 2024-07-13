@@ -15,15 +15,7 @@ const Cards: React.FC<Props> = ({ local }) => {
   const [storageData, setStorageData] =
     useState<string>(local);
 
-  useEffect(() => {
-    fetchAnimals();
-  }, [storageData]);
-
-  useEffect(() => {
-    setStorageData(local);
-  }, [local]);
-
-  const fetchAnimals = async () => {
+    const fetchAnimals = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -35,6 +27,16 @@ const Cards: React.FC<Props> = ({ local }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchAnimals();
+  }, [storageData,fetchAnimals()]);
+
+  useEffect(() => {
+    setStorageData(local);
+  }, [local]);
+
+
 
   if (loading) {
     return (
