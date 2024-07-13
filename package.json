@@ -14,8 +14,11 @@
   },
   "dependencies": {
     "form-urlencoded": "^6.1.5",
+    "install": "^0.13.0",
+    "npm": "^10.8.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "devDependencies": {
