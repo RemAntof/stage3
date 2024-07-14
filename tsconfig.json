@@ -20,8 +20,10 @@
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@constants/*": ["src/constants/*"]
-    }
+      "@constants/*": ["src/constants/*"],
+      "@hooks/*": ["src/hooks/*"]
+    },
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "include": ["./src"],
   "references": [

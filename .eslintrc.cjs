@@ -15,7 +15,12 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react-compiler/react-compiler': 'error',
-    'no-console': 'warn',
+    'no-console': [
+      'warn',
+      {
+        allow: ['error'],
+      },
+    ],
     'no-unused-expressions': 'error',
     'no-inline-comments': 'error',
   },

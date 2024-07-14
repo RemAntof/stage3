@@ -3,15 +3,16 @@ import {
   DEFAULT_PAGE,
   DEFAULT_PAGESIZE,
 } from '@constants/apiEndpoints';
-import Animal from '@interfaces/animal';
+import ApiResponse from '@interfaces/apiResponse';
 import formUrlEncoded from 'form-urlencoded';
 
 const fetchApi = async (
-  name: string | undefined = undefined
-): Promise<Animal[]> => {
+  name: string | undefined = undefined,
+  activePage: number = DEFAULT_PAGE
+): Promise<ApiResponse> => {
   const url = name
-    ? `${BASE_URL}`
-    : `${BASE_URL}?pageNumber=${DEFAULT_PAGE}&pageSize=${DEFAULT_PAGESIZE}`;
+    ? `${BASE_URL}?pageNumber=${activePage}&pageSize=${DEFAULT_PAGESIZE}&name=${name}`
+    : `${BASE_URL}?pageNumber=${activePage}&pageSize=${DEFAULT_PAGESIZE}`;
   const method = name ? 'POST' : 'GET';
   const body = name ? formUrlEncoded({ name: name }) : null;
   const response = await fetch(url, {
@@ -28,6 +29,6 @@ const fetchApi = async (
   }
 
   const data = await response.json();
-  return data.animals;
+  return data;
 };
 export default fetchApi;

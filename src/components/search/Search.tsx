@@ -1,52 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '@components/search/search.module.css';
 import SearchInput from '@components/inputs/searchInput/SearchInput';
 import SearchButton from '@components/buttons/searchButton/SearchButton';
-import { LOCAL_STORAGE_KEY } from '@constants/localStorage';
-import getLocalStorage from '@services/localStorage/getlocalStorage';
 
 interface SearchProps {
-  updateLocal: (newLocal: string) => void;
+  setLocalStorage: (localStorage: string) => void;
+  localStorage: string;
 }
 
-interface SearchState {
-  inputData: string;
-}
+const Search: React.FC<SearchProps> = ({
+  setLocalStorage,
+  localStorage,
+}) => {
+  const [inputData, setInputData] =
+    useState<string>(localStorage);
+  const navigate = useNavigate();
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = {
-      inputData: getLocalStorage(LOCAL_STORAGE_KEY) || '',
-    };
-  }
-
-  handleInputChange = (inputData: string) => {
-    this.setState({ inputData });
+  const handleInputChange = (inputData: string) => {
+    setInputData(inputData);
   };
 
-  handleSubmit = (
+  const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    const { inputData } = this.state;
-    localStorage.setItem(LOCAL_STORAGE_KEY, inputData);
-    this.props.updateLocal(inputData);
+    setLocalStorage(inputData);
+    navigate(
+      `/?page=1&search=${encodeURIComponent(inputData)}`
+    );
   };
 
-  render() {
-    return (
-      <div className={styles.searchContainer}>
-        <form onSubmit={this.handleSubmit}>
-          <SearchInput
-            value={this.state.inputData}
-            onInputChange={this.handleInputChange}
-          />
-          <SearchButton buttonType="submit" />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.searchContainer}>
+      <form onSubmit={handleSubmit}>
+        <SearchInput
+          value={inputData}
+          onInputChange={handleInputChange}
+        />
+        <SearchButton buttonType="submit" />
+      </form>
+    </div>
+  );
+};
 
 export default Search;
