@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardDetail component renders correctly when animal is fetched 1`] = `
+<div>
+  <div>
+    <button>
+      Go Back
+    </button>
+    <div
+      class="cardBox"
+    >
+      <div
+        class="cardName"
+      >
+        Test Animal
+      </div>
+      <div
+        class="cardText"
+      >
+        🌍Earth Animal:
+         
+        Yes
+      </div>
+      <div
+        class="cardText"
+      >
+        🐛Earth Insect:
+         
+        NO
+      </div>
+      <div
+        class="cardText"
+      >
+        🐦Avian: 
+        NO
+      </div>
+      <div
+        class="cardText"
+      >
+        🐕‍🦺Canine: 
+        Yes
+      </div>
+      <div
+        class="cardText"
+      >
+        🐈Feline: 
+        NO
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`CardDetail component renders error message when fetch fails 1`] = `
+<div>
+  <div>
+    Error: 
+    Fetch failed
+  </div>
+</div>
+`;

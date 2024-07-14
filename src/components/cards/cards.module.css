@@ -1,0 +1,7 @@
+.cardsBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 15px;
+}
