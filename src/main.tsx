@@ -21,17 +21,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  //   {
-  //   path: '/?page=:page&search=:search',
-  //   element: <App />,
-  //   errorElement: <ErrorPage />,
-  //   children: [
-  //     {
-  //       path: ':animalName',
-  //       element: <CardDetail />,
-  //     },
-  //   ],
-  // },
 ]);
 
 ReactDOM.createRoot(
