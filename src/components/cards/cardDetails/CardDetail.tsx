@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import fetchApi from '@services/API/fetchApi';
 import Loader from '@components/loader/loader';
 import Card from '../card/card';
@@ -13,7 +13,6 @@ const CardDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const cardDetailRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -31,31 +30,6 @@ const CardDetail: React.FC = () => {
 
     fetchAnimal();
   }, [animalName]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        cardDetailRef.current &&
-        !cardDetailRef.current.contains(
-          event.target as Node
-        )
-      ) {
-        navigate(-1);
-      }
-    };
-
-    document.addEventListener(
-      'mousedown',
-      handleClickOutside
-    );
-
-    return () => {
-      document.removeEventListener(
-        'mousedown',
-        handleClickOutside
-      );
-    };
-  }, [navigate]);
 
   if (loading) return <Loader />;
 

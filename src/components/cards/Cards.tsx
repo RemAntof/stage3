@@ -40,7 +40,7 @@ const Cards: React.FC<Props> = ({ local }) => {
       page: pageParam.toString(),
       search: storageData,
     });
-  });
+  }, []);
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -81,7 +81,7 @@ const Cards: React.FC<Props> = ({ local }) => {
       <ul className={styles.cardsBox}>
         {animals.map((animal) => (
           <li key={animal.uid}>
-            <Link to={`/${animal.name}`}>
+            <Link to={`${animal.name}`}>
               <Card animal={animal} />
             </Link>
           </li>
