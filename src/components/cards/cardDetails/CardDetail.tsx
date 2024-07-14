@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import fetchApi from '@services/API/fetchApi';
 import Loader from '@components/loader/loader';
 import Card from '../card/card';
@@ -13,6 +13,7 @@ const CardDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const cardDetailRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -31,12 +32,17 @@ const CardDetail: React.FC = () => {
     fetchAnimal();
   }, [animalName]);
 
+  const navigateBack = () => {
+    navigate(-1);
+  };
+
   if (loading) return <Loader />;
 
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div ref={cardDetailRef}>
+      <button onClick={navigateBack}>Go Back</button>
       {animal ? (
         <Card animal={animal} />
       ) : (
