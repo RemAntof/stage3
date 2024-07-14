@@ -16,6 +16,7 @@ interface Props {
 const Cards: React.FC<Props> = ({ local }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const pageParam = parseInt(searchParams.get('page')) || 1;
+  const searchQuery = searchParams.get('search') || '';
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,7 @@ const Cards: React.FC<Props> = ({ local }) => {
       page: pageParam.toString(),
       search: storageData,
     });
-  }, [pageParam, storageData, setSearchParams]);
+  });
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -63,8 +64,8 @@ const Cards: React.FC<Props> = ({ local }) => {
   }, [storageData, activePage]);
 
   useEffect(() => {
-    setActivePage(pageParam - 1);
-  }, [pageParam]);
+    setActivePage(DEFAULT_PAGE);
+  }, [searchQuery]);
 
   useEffect(() => {
     setStorageData(local);
@@ -80,9 +81,7 @@ const Cards: React.FC<Props> = ({ local }) => {
       <ul className={styles.cardsBox}>
         {animals.map((animal) => (
           <li key={animal.uid}>
-            <Link
-              to={`/?page=${activePage}&search=${storageData}/${animal.name}`}
-            >
+            <Link to={`/${animal.name}`}>
               <Card animal={animal} />
             </Link>
           </li>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import Animal from '@interfaces/animal';
+import { useNavigate, useParams } from 'react-router-dom';
 import fetchApi from '@services/API/fetchApi';
 import Loader from '@components/loader/loader';
 import Card from '../card/card';
+import Animal from '@interfaces/animal';
 
 const CardDetail: React.FC = () => {
   const { animalName } = useParams<{
@@ -13,6 +13,7 @@ const CardDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const cardDetailRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -21,12 +22,13 @@ const CardDetail: React.FC = () => {
       try {
         const responseData = await fetchApi(animalName);
         setAnimal(responseData.animals[0]);
-        setLoading(false);
       } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
       }
     };
+
     fetchAnimal();
   }, [animalName]);
 
@@ -38,10 +40,7 @@ const CardDetail: React.FC = () => {
           event.target as Node
         )
       ) {
-        // Clicked outside the card detail component
-        // Implement logic to close the component here
-        // For now, let's just log it
-        console.log('Clicked outside!');
+        navigate(-1);
       }
     };
 
@@ -56,15 +55,11 @@ const CardDetail: React.FC = () => {
         handleClickOutside
       );
     };
-  }, []);
+  }, [navigate]);
 
-  if (loading) {
-    return <Loader />;
-  }
+  if (loading) return <Loader />;
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div ref={cardDetailRef}>

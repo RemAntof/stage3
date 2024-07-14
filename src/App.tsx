@@ -5,12 +5,12 @@ import { Outlet } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
-    <>
+    <div>
       <MainPage />
       <div id="outlet">
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };
 
