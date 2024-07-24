@@ -16,6 +16,7 @@ const api = createApi({
     animalList: build.query({
       query({ activePage }: { activePage: number }) {
         return {
+          url: '/search',
           params: {
             pageNumber: activePage,
             pageSize: DEFAULT_PAGESIZE,
@@ -38,6 +39,7 @@ const api = createApi({
         activePage: number;
       }) {
         return {
+          url: '/search',
           params: {
             pageNumber: activePage,
             pageSize: DEFAULT_PAGESIZE,
