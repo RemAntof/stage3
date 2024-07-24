@@ -8,6 +8,8 @@ import {
 import ErrorPage from '@views/errorView/errorView.tsx';
 import CardDetail from '@components/cards/cardDetails/CardDetail.tsx';
 import React from 'react';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+import api from '@services/API/redux.ts';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,8 @@ ReactDOM.createRoot(
   document.getElementById('root')!
 ).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ApiProvider api={api}>
+      <RouterProvider router={router} />
+    </ApiProvider>
   </React.StrictMode>
 );
