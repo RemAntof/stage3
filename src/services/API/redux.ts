@@ -2,6 +2,7 @@ import {
   BASE_URL,
   DEFAULT_PAGESIZE,
 } from '@constants/apiEndpoints';
+import ApiResponse from '@interfaces/apiResponse';
 import {
   createApi,
   fetchBaseQuery,
@@ -11,46 +12,46 @@ import formUrlEncoded from 'form-urlencoded';
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
   }),
   endpoints: (build) => ({
-    animalList: build.query({
-      query({ activePage }: { activePage: number }) {
+    animal: build.query<
+      ApiResponse,
+      { activePage: number; name: string }
+    >({
+      query({ activePage, name }) {
         return {
           url: '/search',
           params: {
             pageNumber: activePage,
             pageSize: DEFAULT_PAGESIZE,
           },
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-            'Content-Type':
-              'application/x-www-form-urlencoded',
-          },
+          method: name ? 'POST' : 'GET',
+          body: name
+            ? formUrlEncoded({ name: name })
+            : undefined,
         };
       },
     }),
-    animalDetails: build.query({
-      query({
-        name,
-        activePage,
-      }: {
-        name: string;
-        activePage: number;
-      }) {
+    animalDetails: build.query<
+      ApiResponse,
+      { name: string }
+    >({
+      query({ name }) {
         return {
           url: '/search',
           params: {
-            pageNumber: activePage,
+            name: name,
+            pageNumber: 0,
             pageSize: DEFAULT_PAGESIZE,
           },
-          method: 'POST',
-          headers: {
-            accept: 'application/json',
-            'Content-Type':
-              'application/x-www-form-urlencoded',
-          },
-          body: formUrlEncoded({ name: name }),
+          method: name ? 'POST' : 'GET',
+          body: name
+            ? formUrlEncoded({ name: name })
+            : undefined,
         };
       },
     }),
@@ -58,3 +59,5 @@ const api = createApi({
 });
 
 export default api;
+export const { useAnimalQuery, useAnimalDetailsQuery } =
+  api;
