@@ -1,8 +1,10 @@
 import {
+  createSelector,
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
 import Animal from '@interfaces/animal';
+import { RootState } from '@services/store/store';
 export interface ItemsSelectedState {
   items: { item: Animal };
 }
@@ -30,3 +32,15 @@ const itemsSelectedSlice = createSlice({
 export const { addItem, removeItem } =
   itemsSelectedSlice.actions;
 export default itemsSelectedSlice.reducer;
+
+export const getNumItems = createSelector(
+  (state: RootState) => state.itemsSelected.items,
+  (items) => {
+    let numItems = 0;
+    for (const id in items) {
+      if (items[id]) numItems++;
+    }
+
+    return numItems;
+  }
+);

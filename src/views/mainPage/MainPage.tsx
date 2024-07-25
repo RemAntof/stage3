@@ -5,6 +5,7 @@ import { LOCAL_STORAGE_KEY } from '@constants/localStorage';
 import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
 import TriggerErrorButton from '@components/buttons/triggerErrorButton/TriggerErrorButton';
 import useLocalStorage from '@hooks/useLocalStorage';
+import Flyout from '@components/flyout/flyout';
 
 const MainPage: React.FC = () => {
   const [localStorage, setLocalStorage] = useLocalStorage(
@@ -20,6 +21,7 @@ const MainPage: React.FC = () => {
           localStorage={localStorage}
         />
         <Cards local={localStorage} />
+        <Flyout />
       </ErrorBoundary>
     </div>
   );
