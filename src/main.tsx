@@ -8,11 +8,8 @@ import {
 import ErrorPage from '@views/errorView/errorView.tsx';
 import CardDetail from '@components/cards/cardDetails/CardDetail.tsx';
 import React from 'react';
-import { ApiProvider } from '@reduxjs/toolkit/query/react';
-import api from '@services/API/redux.ts';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { buildGetDefaultMiddleware } from 'node_modules/@reduxjs/toolkit/dist/getDefaultMiddleware';
+import store from '@services/store/store.ts';
 
 const router = createBrowserRouter([
   {
@@ -27,13 +24,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-const store = configureStore({
-  reducer:{
-    [api.reducerPath]: api.reducer
-  },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware)
-})
 
 ReactDOM.createRoot(
   document.getElementById('root')!

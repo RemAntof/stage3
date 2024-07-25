@@ -1,5 +1,5 @@
 .cardBox {
-  display: flex;
+  display: flex 1;
   align-items: center;
   justify-content: start;
   gap: 1rem;

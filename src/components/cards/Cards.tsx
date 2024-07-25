@@ -7,6 +7,7 @@ import Pagination from './pagination/pagination';
 import Loader from '@components/loader/loader';
 import ErrorPage from '@views/errorView/errorView';
 import { useAnimalQuery } from '@services/API/redux';
+import CheckBox from './card/checkbox/checkbox';
 
 interface Props {
   local: string;
@@ -55,6 +56,7 @@ const Cards: React.FC<Props> = ({ local }) => {
             <Link to={`${animal.name}`}>
               <Card animal={animal} />
             </Link>
+            <CheckBox animal={animal} />
           </li>
         ))}
       </ul>
