@@ -4,7 +4,7 @@ import {
 } from '@hooks/useDispatchUseSelector';
 import styles from './checkbox.module.css';
 import CardProp from '@interfaces/cardProp';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   addItem,
   removeItem,
@@ -15,31 +15,37 @@ const CheckBox: React.FC<CardProp> = ({ animal }) => {
     (state) => state.itemsSelected.items
   );
   const dispatch = useAppDispatch();
-  const isSelected = items[animal.uid] ? true : false;
+  let isSelected = items[animal.uid] ? true : false;
 
-  const [isChecked, setIsChecked] = useState(isSelected);
+  const toggleDispatch = useCallback(
+    (isChecked) => {
+      if (isChecked) {
+        if (!items[animal.uid]) {
+          dispatch(addItem(animal));
+        }
+      } else {
+        if (items[animal.uid]) {
+          dispatch(removeItem(animal));
+        }
+      }
+    },
+    [animal, dispatch, items]
+  );
 
   const handleChange = () => {
-    setIsChecked((prev) => !prev);
+    isSelected = !isSelected;
+    toggleDispatch(isSelected);
   };
 
   useEffect(() => {
-    if (isChecked) {
-      if (!items[animal.uid]) {
-        dispatch(addItem(animal));
-      }
-    } else {
-      if (items[animal.uid]) {
-        dispatch(removeItem(animal));
-      }
-    }
-  }, [isChecked, animal, items, dispatch]);
+    toggleDispatch(isSelected);
+  }, [isSelected, toggleDispatch]);
 
   return (
     <input
       type="checkbox"
       className={styles.checkBox}
-      checked={isChecked}
+      checked={isSelected}
       onChange={handleChange}
     />
   );
