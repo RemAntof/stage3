@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Card from './card/card';
 import styles from '@components/cards/cards.module.css';
@@ -8,12 +12,14 @@ import Loader from '@components/loader/loader';
 import ErrorPage from '@views/errorView/errorView';
 import { useAnimalQuery } from '@services/API/redux';
 import CheckBox from './card/checkbox/checkbox';
+import { ThemeContext } from 'src/App';
 
 interface Props {
   local: string;
 }
 
 const Cards: React.FC<Props> = ({ local }) => {
+  const theme = useContext(ThemeContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const pageParam = parseInt(searchParams.get('page')) || 1;
   const searchQuery = searchParams.get('search') || '';
@@ -53,7 +59,10 @@ const Cards: React.FC<Props> = ({ local }) => {
       <ul className={styles.cardsBox}>
         {data.animals.map((animal) => (
           <li key={animal.uid}>
-            <Link to={`${animal.name}`}>
+            <Link
+              className={`${styles.disabled} cardText ${theme}`}
+              to={`${animal.name}`}
+            >
               <Card animal={animal} />
             </Link>
             <CheckBox animal={animal} />

@@ -4,13 +4,15 @@ import {
 } from '@hooks/useDispatchUseSelector';
 import styles from './checkbox.module.css';
 import CardProp from '@interfaces/cardProp';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import {
   addItem,
   removeItem,
 } from '@components/flyout/cardsSlice';
+import { ThemeContext } from 'src/App';
 
 const CheckBox: React.FC<CardProp> = ({ animal }) => {
+  const theme = useContext(ThemeContext);
   const items = useAppSelector(
     (state) => state.itemsSelected.items
   );
@@ -44,7 +46,7 @@ const CheckBox: React.FC<CardProp> = ({ animal }) => {
   return (
     <input
       type="checkbox"
-      className={styles.checkBox}
+      className={`${styles.checkBox} checkBox ${theme}`}
       checked={isSelected}
       onChange={handleChange}
     />

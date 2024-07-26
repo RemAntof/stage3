@@ -3,7 +3,6 @@ import Cards from '@components/cards/Cards';
 import Search from '@components/search/Search';
 import { LOCAL_STORAGE_KEY } from '@constants/localStorage';
 import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
-import TriggerErrorButton from '@components/buttons/triggerErrorButton/TriggerErrorButton';
 import useLocalStorage from '@hooks/useLocalStorage';
 import Flyout from '@components/flyout/flyout';
 
@@ -15,7 +14,6 @@ const MainPage: React.FC = () => {
   return (
     <div>
       <ErrorBoundary>
-        <TriggerErrorButton />
         <Search
           setLocalStorage={setLocalStorage}
           localStorage={localStorage}

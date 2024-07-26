@@ -1,5 +1,6 @@
 .appContainer {
   display: flex;
+  justify-content: center;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -8,6 +9,7 @@
 .mainPage {
   flex-shrink: 0;
   width: 100%;
+  max-width: 1440px;
   transition:
     transform 0.3s ease-in-out,
     width 0.3s ease-in-out;
@@ -20,7 +22,6 @@
   width: 0;
   height: 100%;
   transition: width 0.3s ease-in-out;
-  background-color: #242424;
 }
 
 #outlet.visible {
@@ -29,4 +30,23 @@
 
 .mainPage.shifted {
   width: 60%;
+}
+.appContainer.shifted {
+  justify-content: start;
+}
+
+.appContainer.dark {
+  background-color: rgb(44, 44, 44);
+}
+.cardBox.dark {
+  background-color: rgb(134, 134, 134);
+}
+.cardName.dark {
+  background-color: rgb(92, 92, 92);
+}
+.cardText.dark {
+  color: rgb(202, 202, 202);
+}
+.checkBox.dark {
+  accent-color: rgb(1, 119, 37);
 }
