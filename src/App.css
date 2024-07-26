@@ -50,3 +50,26 @@
 .checkBox.dark {
   accent-color: rgb(1, 119, 37);
 }
+.searchBox.dark {
+  background-color: rgb(105, 105, 105);
+}
+
+h1.light{
+  color: rgb(75, 75, 75)
+}
+.appContainer.light {
+  background-color: rgb(240, 240, 240);
+}
+.cardBox.light {
+  background-color: rgb(179, 179, 179);
+  color: rgb(58, 58, 58);
+}
+.cardName.light {
+  background-color: rgb(223, 223, 223);
+}
+.checkBox.light {
+  accent-color: rgb(119, 1, 1);
+}
+.searchBox.light {
+  background-color: rgb(255, 255, 255);
+}

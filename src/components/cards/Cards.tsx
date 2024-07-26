@@ -55,7 +55,7 @@ const Cards: React.FC<Props> = ({ local }) => {
 
   return (
     <div>
-      <h1>Animal List</h1>
+      <h1 className={theme}>Animal List</h1>
       <ul className={styles.cardsBox}>
         {data.animals.map((animal) => (
           <li key={animal.uid}>
