@@ -27,9 +27,15 @@ const itemsSelectedSlice = createSlice({
       const item = action.payload;
       delete state.items[item.uid];
     },
+    removeAllItems(state) {
+      const items = state.items;
+      for (const id in items) {
+        delete items[id];
+      }
+    },
   },
 });
-export const { addItem, removeItem } =
+export const { addItem, removeItem, removeAllItems } =
   itemsSelectedSlice.actions;
 export default itemsSelectedSlice.reducer;
 

@@ -4,7 +4,7 @@ import {
 } from '@hooks/useDispatchUseSelector';
 import styles from './checkbox.module.css';
 import CardProp from '@interfaces/cardProp';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import {
   addItem,
   removeItem,
@@ -15,19 +15,23 @@ const CheckBox: React.FC<CardProp> = ({ animal }) => {
     (state) => state.itemsSelected.items
   );
   const dispatch = useAppDispatch();
-
   const isSelected = items[animal.uid] ? true : false;
+
   const [isChecked, setIsChecked] = useState(isSelected);
 
-  const handleChange = useCallback(() => {
+  const handleChange = () => {
     setIsChecked((prev) => !prev);
-  }, []);
+  };
 
   useEffect(() => {
     if (isChecked) {
-      if (!items[animal.uid]) dispatch(addItem(animal));
+      if (!items[animal.uid]) {
+        dispatch(addItem(animal));
+      }
     } else {
-      if (items[animal.uid]) dispatch(removeItem(animal));
+      if (items[animal.uid]) {
+        dispatch(removeItem(animal));
+      }
     }
   }, [isChecked, animal, items, dispatch]);
 
