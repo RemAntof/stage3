@@ -1,0 +1,271 @@
+.container {
+  position: absolute;
+  font-size: 1rem;
+  margin: 10px;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+  width: 5em;
+  height: 2em;
+  border-radius: 5em;
+  box-shadow:
+    0px 4px 6px 0px #fff,
+    1px -3px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5em;
+  z-index: 2;
+  box-shadow:
+    0px 7px 9px 0px rgba(0, 0, 0, 0.25) inset,
+    0px -1px 13px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.container input {
+  display: none;
+}
+
+.container input:checked + .background {
+  background-color: #1b202e;
+  animation: backgroundNight 1000ms forwards;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  height: 200%;
+  width: 100%;
+
+  background-color: #3278ac;
+
+  transition: 1000ms;
+  animation: backgroundDay 1000ms forwards;
+}
+
+.stars {
+  height: 50%;
+  width: 50%;
+  margin-left: 10%;
+}
+
+.clouds {
+  position: relative;
+  height: 50%;
+  width: 100%;
+}
+
+.clouds > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.clouds > *:first-child {
+  top: -2%;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+}
+
+.sun__moon__container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  padding: 2.5%;
+  /* transition: 1000ms width; */
+  animation: sunMoonAnimationReverse 1000ms forwards;
+}
+
+.rays {
+  position: absolute;
+  left: calc(2.5% + 0.875em);
+  top: 0;
+
+  height: 100%;
+  width: 100%;
+
+  transition: 1000ms translate;
+}
+
+.rays > * {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2.75em;
+  height: 2.75em;
+
+  translate: -50% -50%;
+  border-radius: 50%;
+  background-color: #ffffff1a;
+}
+
+.rays > div:nth-child(2) {
+  font-size: 1.5em;
+}
+
+.rays > div:nth-child(3) {
+  font-size: 2em;
+}
+
+.container input:checked ~ .content .sun__moon__container {
+  animation: sunMoonAnimation 1000ms forwards;
+}
+
+.sun__moon {
+  position: relative;
+  display: flex;
+  gap: 0.5em;
+  overflow: hidden;
+
+  width: 1.75em;
+  height: 1.75em;
+  border-radius: 50%;
+  z-index: 2;
+
+  transition: 1000ms translate;
+}
+
+.sun__moon:hover,
+.sun__moon:hover ~ .rays {
+  translate: 0.25em;
+}
+
+.sun {
+  background-color: hsla(47, 88%, 55%, 1);
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 3;
+
+  box-shadow:
+    3px 4px 4px 0px rgba(255, 255, 255, 0.68) inset,
+    0px -5px 4px 0px hsl(47, 61%, 47%) inset;
+}
+
+.moon {
+  position: relative;
+  background-color: hsla(210, 13%, 79%, 1);
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  cursor: pointer;
+  z-index: 3;
+  border-radius: 50%;
+  box-shadow:
+    3px 4px 4px 0px rgba(255, 255, 255, 0.68) inset,
+    0px -5px 4px 0px hsl(210, 0%, 71%) inset;
+  transition: 1000ms translate;
+}
+
+.moon > div {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: hsla(219, 17%, 64%, 1);
+  box-shadow: inset 1px 1px 3px 1px hsla(0, 0%, 0%, 0.15);
+}
+
+.moon > div:nth-child(1) {
+  top: 12%;
+  left: 39%;
+  font-size: 0.6em;
+}
+
+.moon > div:nth-child(2) {
+  top: 48%;
+  left: 13%;
+  font-size: 0.35em;
+}
+
+.moon > div:nth-child(3) {
+  top: 63%;
+  right: 26%;
+  font-size: 0.15em;
+}
+
+.container input:checked ~ .content .moon {
+  translate: calc(-100% - 0.5em);
+}
+
+.container input:checked ~ .content .sun__moon:hover,
+.container
+  input:checked
+  ~ .content
+  .sun__moon:hover
+  ~ .rays {
+  translate: -0.25em;
+}
+
+@keyframes sunMoonAnimationReverse {
+  from {
+    width: 1.75em;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes sunMoonAnimation {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 1.75em;
+  }
+}
+
+@keyframes backgroundNight {
+  0% {
+    translate: 0 -50%;
+  }
+
+  75% {
+    translate: 0 1%;
+  }
+
+  100% {
+    translate: 0;
+  }
+}
+
+@keyframes backgroundDay {
+  0% {
+    translate: 0;
+  }
+
+  75% {
+    translate: 0 -51%;
+  }
+
+  100% {
+    translate: 0 -50%;
+  }
+}

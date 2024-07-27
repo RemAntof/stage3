@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckBox Snapshot Tests renders with dark theme and checkbox checked 1`] = `
+<DocumentFragment>
+  <input
+    checked=""
+    class="checkBox checkBox dark"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;
+
+exports[`CheckBox Snapshot Tests renders with light theme and checkbox unchecked 1`] = `
+<DocumentFragment>
+  <input
+    class="checkBox checkBox light"
+    type="checkbox"
+  />
+</DocumentFragment>
+`;

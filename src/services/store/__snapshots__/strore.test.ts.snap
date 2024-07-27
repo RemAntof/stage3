@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Redux Store should match the initial state snapshot 1`] = `
+{
+  "api": {
+    "config": {
+      "focused": true,
+      "invalidationBehavior": "delayed",
+      "keepUnusedDataFor": 60,
+      "middlewareRegistered": false,
+      "online": true,
+      "reducerPath": "api",
+      "refetchOnFocus": false,
+      "refetchOnMountOrArgChange": false,
+      "refetchOnReconnect": false,
+    },
+    "mutations": {},
+    "provided": {},
+    "queries": {},
+    "subscriptions": {},
+  },
+  "itemsSelected": {
+    "items": {
+      "item": undefined,
+    },
+  },
+}
+`;
+
+exports[`Redux Store should match the snapshot 1`] = `
+{
+  "api": {
+    "config": {
+      "focused": true,
+      "invalidationBehavior": "delayed",
+      "keepUnusedDataFor": 60,
+      "middlewareRegistered": false,
+      "online": true,
+      "reducerPath": "api",
+      "refetchOnFocus": false,
+      "refetchOnMountOrArgChange": false,
+      "refetchOnReconnect": false,
+    },
+    "mutations": {},
+    "provided": {},
+    "queries": {},
+    "subscriptions": {},
+  },
+  "itemsSelected": {
+    "items": {
+      "item": undefined,
+    },
+  },
+}
+`;
