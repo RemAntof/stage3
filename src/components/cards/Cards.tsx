@@ -32,7 +32,6 @@ const Cards: React.FC<Props> = ({ local }) => {
     activePage: activePage,
     name: local,
   });
-  console.log(data);
 
   const updatePage = (newPage: number) => {
     setActivePage(newPage);

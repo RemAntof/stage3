@@ -1,6 +1,8 @@
 import Animal from '@interfaces/animal';
 
-const convertToCsv = (items: { item: Animal }) => {
+export const convertToCsv = (items: {
+  [key: string]: Animal;
+}) => {
   const separator = ',';
   const nextRowSeparator = '\n';
   const csvData = [];
@@ -19,7 +21,7 @@ const convertToCsv = (items: { item: Animal }) => {
 
 const exportToCsv = (
   filename: string,
-  items: { item: Animal }
+  items: { [key: string]: Animal }
 ) => {
   const csvContent = convertToCsv(items);
   const blob = new Blob([csvContent], {
