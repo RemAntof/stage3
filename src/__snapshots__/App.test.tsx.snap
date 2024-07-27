@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component snapshot - dark theme, outlet hidden 1`] = `
+<DocumentFragment>
+  <div
+    class="appContainer dark "
+    data-testid="app-container"
+  >
+    <div
+      class="mainPage "
+    >
+      <div
+        class="container"
+      >
+        <input
+          id="checkbox"
+          type="checkbox"
+        />
+        <div
+          class="background"
+        >
+          <img
+            class="stars"
+            src="https://gateway.pinata.cloud/ipfs/Qmcd1rqt5BJrQYX9hHeWc8AqEhBp2pj6Mis82FC5wVW2a2"
+          />
+          <div
+            class="clouds"
+          >
+            <img
+              class="stars"
+              src="https://gateway.pinata.cloud/ipfs/QmdDiiwPP4VC5jmRTtPa1v4MrA5JUesq8WZHs8ACLt3Vcj"
+            />
+            <img
+              class="stars"
+              src="https://gateway.pinata.cloud/ipfs/QmYNhwZuMNCucpn8YgGxPdKBnVsBDr473pbXCmxKE4uPJa"
+            />
+          </div>
+        </div>
+        <label
+          class="content"
+          for="checkbox"
+        >
+          <div
+            class="sun__moon__container"
+          >
+            <div
+              class="sun__moon"
+            >
+              <div
+                class="sun"
+              />
+              <div
+                class="moon"
+              >
+                <div />
+                <div />
+                <div />
+              </div>
+            </div>
+            <div
+              class="rays"
+            >
+              <div />
+              <div />
+              <div />
+            </div>
+          </div>
+        </label>
+      </div>
+      <div>
+        <h1>
+          Something went wrong.
+        </h1>
+      </div>
+    </div>
+    <div
+      class="hidden"
+      data-testid="outlet"
+      id="outlet"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`App component snapshot - dark theme, outlet visible 1`] = `
+<DocumentFragment>
+  <div
+    class="appContainer dark shifted"
+    data-testid="app-container"
+  >
+    <div
+      class="mainPage shifted"
+    >
+      <div
+        class="container"
+      >
+        <input
+          id="checkbox"
+          type="checkbox"
+        />
+        <div
+          class="background"
+        >
+          <img
+            class="stars"
+            src="https://gateway.pinata.cloud/ipfs/Qmcd1rqt5BJrQYX9hHeWc8AqEhBp2pj6Mis82FC5wVW2a2"
+          />
+          <div
+            class="clouds"
+          >
+            <img
+              class="stars"
+              src="https://gateway.pinata.cloud/ipfs/QmdDiiwPP4VC5jmRTtPa1v4MrA5JUesq8WZHs8ACLt3Vcj"
+            />
+            <img
+              class="stars"
+              src="https://gateway.pinata.cloud/ipfs/QmYNhwZuMNCucpn8YgGxPdKBnVsBDr473pbXCmxKE4uPJa"
+            />
+          </div>
+        </div>
+        <label
+          class="content"
+          for="checkbox"
+        >
+          <div
+            class="sun__moon__container"
+          >
+            <div
+              class="sun__moon"
+            >
+              <div
+                class="sun"
+              />
+              <div
+                class="moon"
+              >
+                <div />
+                <div />
+                <div />
+              </div>
+            </div>
+            <div
+              class="rays"
+            >
+              <div />
+              <div />
+              <div />
+            </div>
+          </div>
+        </label>
+      </div>
+      <div>
+        <h1>
+          Something went wrong.
+        </h1>
+      </div>
+    </div>
+    <div
+      class="visible"
+      data-testid="outlet"
+      id="outlet"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`App component snapshot - light theme, outlet hidden 1`] = `
+<DocumentFragment>
+  <div
+    class="appContainer light "
+    data-testid="app-container"
+  >
+    <div
+      class="mainPage "
+    >
+      <div
+        class="container"
+      >
+        <input
+          id="checkbox"
+          type="checkbox"
+        />
+        <div
+          class="background"
+        >
+          <img
+            class="stars"
+            src="https://gateway.pinata.cloud/ipfs/Qmcd1rqt5BJrQYX9hHeWc8AqEhBp2pj6Mis82FC5wVW2a2"
+          />
+          <div
+            class="clouds"
+          >
+            <img
+              class="stars"
+              src="https://gateway.pinata.cloud/ipfs/QmdDiiwPP4VC5jmRTtPa1v4MrA5JUesq8WZHs8ACLt3Vcj"
+            />
+            <img
+              class="stars"
+              src="https://gateway.pinata.cloud/ipfs/QmYNhwZuMNCucpn8YgGxPdKBnVsBDr473pbXCmxKE4uPJa"
+            />
+          </div>
+        </div>
+        <label
+          class="content"
+          for="checkbox"
+        >
+          <div
+            class="sun__moon__container"
+          >
+            <div
+              class="sun__moon"
+            >
+              <div
+                class="sun"
+              />
+              <div
+                class="moon"
+              >
+                <div />
+                <div />
+                <div />
+              </div>
+            </div>
+            <div
+              class="rays"
+            >
+              <div />
+              <div />
+              <div />
+            </div>
+          </div>
+        </label>
+      </div>
+      <div>
+        <h1>
+          Something went wrong.
+        </h1>
+      </div>
+    </div>
+    <div
+      class="hidden"
+      data-testid="outlet"
+      id="outlet"
+    />
+  </div>
+</DocumentFragment>
+`;

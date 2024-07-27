@@ -1,81 +1,76 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import {
-  MemoryRouter,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import CardDetail from './CardDetail';
-import fetchApi from '@services/API/fetchApi';
 
-jest.mock('@services/API/fetchApi');
-const mockFetchApi = fetchApi as jest.MockedFunction<
-  typeof fetchApi
->;
+import { useAnimalDetailsQuery } from '@services/API/redux';
 
-describe('CardDetail component', () => {
-  it('renders correctly when animal is fetched', async () => {
-    mockFetchApi.mockResolvedValueOnce({
-      page: {
-        pageNumber: 1,
-        pageSize: 20,
-        numberOfElements: 1,
-        totalElements: 1,
-        totalPages: 1,
-        firstPage: true,
-        lastPage: false,
-      },
-      sort: {
-        clauses: [],
-      },
-      animals: [
-        {
-          uid: '1',
-          name: 'Test Animal',
-          earthAnimal: true,
-          earthInsect: false,
-          avian: false,
-          canine: true,
-          feline: false,
-        },
-      ],
+jest.mock('@services/API/redux', () => ({
+  useAnimalDetailsQuery: jest.fn(),
+}));
+
+jest.mock('@components/loader/loader', () => () => (
+  <div>Loading...</div>
+));
+jest.mock('@views/errorView/errorView', () => () => (
+  <div>Error occurred</div>
+));
+jest.mock('../card/card', () => ({ animal }) => (
+  <div>Card for {animal.name}</div>
+));
+
+describe('CardDetail Snapshot Tests', () => {
+  test('renders loading state correctly', () => {
+    (useAnimalDetailsQuery as jest.Mock).mockReturnValue({
+      isLoading: true,
+      isError: false,
+      data: null,
     });
 
-    const { container, findByText } = render(
-      <MemoryRouter initialEntries={['/test']}>
-        <Routes>
-          <Route
-            path="/:animalName"
-            element={<CardDetail />}
-          />
-        </Routes>
+    const { asFragment } = render(
+      <MemoryRouter initialEntries={['/animals/lion']}>
+        <CardDetail />
       </MemoryRouter>
     );
 
-    await findByText('Test Animal');
-
-    expect(container).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 
-  it('renders error message when fetch fails', async () => {
-    mockFetchApi.mockRejectedValueOnce(
-      new Error('Fetch failed')
-    );
+  test('renders error state correctly', () => {
+    (useAnimalDetailsQuery as jest.Mock).mockReturnValue({
+      isLoading: false,
+      isError: true,
+      data: null,
+    });
 
-    const { container, findByText } = render(
-      <MemoryRouter initialEntries={['/test']}>
-        <Routes>
-          <Route
-            path="/:animalName"
-            element={<CardDetail />}
-          />
-        </Routes>
+    const { asFragment } = render(
+      <MemoryRouter initialEntries={['/animals/lion']}>
+        <CardDetail />
       </MemoryRouter>
     );
 
-    await findByText('Error: Fetch failed');
+    expect(asFragment()).toMatchSnapshot();
+  });
 
-    expect(container).toMatchSnapshot();
+  test('renders data state correctly', () => {
+    (useAnimalDetailsQuery as jest.Mock).mockReturnValue({
+      isLoading: false,
+      isError: false,
+      data: {
+        animals: [
+          {
+            name: 'Lion',
+            description: 'King of the jungle',
+          },
+        ],
+      },
+    });
+
+    const { asFragment } = render(
+      <MemoryRouter initialEntries={['/animals/lion']}>
+        <CardDetail />
+      </MemoryRouter>
+    );
+
+    expect(asFragment()).toMatchSnapshot();
   });
 });

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '@components/search/search.module.css';
 import SearchInput from '@components/inputs/searchInput/SearchInput';
 import SearchButton from '@components/buttons/searchButton/SearchButton';
+import { ThemeContext } from 'src/App';
 
 interface SearchProps {
   setLocalStorage: (localStorage: string) => void;
@@ -13,6 +14,8 @@ const Search: React.FC<SearchProps> = ({
   setLocalStorage,
   localStorage,
 }) => {
+  const theme = useContext(ThemeContext);
+
   const [inputData, setInputData] =
     useState<string>(localStorage);
   const navigate = useNavigate();
@@ -32,7 +35,9 @@ const Search: React.FC<SearchProps> = ({
   };
 
   return (
-    <div className={styles.searchContainer}>
+    <div
+      className={`${styles.searchContainer} searchBox ${theme}`}
+    >
       <form onSubmit={handleSubmit}>
         <SearchInput
           value={inputData}

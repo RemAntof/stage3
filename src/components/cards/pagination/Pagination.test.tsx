@@ -6,7 +6,6 @@ import {
 import Pagination from './pagination';
 import '@testing-library/jest-dom';
 
-// Mock setActivePage function
 const mockSetActivePage = jest.fn();
 
 describe('Pagination component', () => {
@@ -22,8 +21,6 @@ describe('Pagination component', () => {
         setActivePage={mockSetActivePage}
       />
     );
-
-    // Check if pagination buttons '<', '1', '2', '3', '4', '5', '>'
     expect(screen.getByText('<')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();

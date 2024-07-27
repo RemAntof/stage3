@@ -1,44 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import fetchApi from '@services/API/fetchApi';
 import Loader from '@components/loader/loader';
 import Card from '../card/card';
-import Animal from '@interfaces/animal';
+
+import ErrorPage from '@views/errorView/errorView';
+import { useAnimalDetailsQuery } from '@services/API/redux';
 
 const CardDetail: React.FC = () => {
   const { animalName } = useParams<{
     animalName: string;
   }>();
-  const [animal, setAnimal] = useState<Animal | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const cardDetailRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchAnimal = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const responseData = await fetchApi(animalName);
-        setAnimal(responseData.animals[0]);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAnimal();
-  }, [animalName]);
+  const { isLoading, isError, data } =
+    useAnimalDetailsQuery({ name: animalName });
 
   const navigateBack = () => {
     navigate(-1);
   };
 
-  if (loading) return <Loader />;
+  if (isLoading) return <Loader />;
 
-  if (error) return <div>Error: {error}</div>;
+  if (isError) return <ErrorPage />;
+  const animal = data.animals[0];
 
   return (
     <div ref={cardDetailRef}>

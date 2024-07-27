@@ -1,5 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CardDetail Snapshot Tests renders data state correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <button>
+      Go Back
+    </button>
+    <div>
+      Card for Lion
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CardDetail Snapshot Tests renders error state correctly 1`] = `
+<DocumentFragment>
+  <div>
+    Error occurred
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CardDetail Snapshot Tests renders loading state correctly 1`] = `
+<DocumentFragment>
+  <div>
+    Loading...
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CardDetail component navigates back when Go Back button is clicked 1`] = `
+<div>
+  <div>
+    <button>
+      Go Back
+    </button>
+    <div
+      class="cardBox cardBox light"
+    >
+      <div
+        class="cardName cardName light"
+      >
+        Test Animal
+      </div>
+      <div
+        class="cardText"
+      >
+        🌍Earth Animal:
+         
+        Yes
+      </div>
+      <div
+        class="cardText"
+      >
+        🐛Earth Insect:
+         
+        NO
+      </div>
+      <div
+        class="cardText"
+      >
+        🐦Avian: 
+        NO
+      </div>
+      <div
+        class="cardText"
+      >
+        🐕‍🦺Canine: 
+        Yes
+      </div>
+      <div
+        class="cardText"
+      >
+        🐈Feline: 
+        NO
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`CardDetail component renders correctly when animal is fetched 1`] = `
 <div>
   <div>

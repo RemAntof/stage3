@@ -6,12 +6,21 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom';
+import { createContext } from 'react';
+import ThemeCheckbox from '@components/themeCheckbox/themeCheckbox';
+
+export const ThemeContext = createContext('light');
 
 const App: React.FC = () => {
   const location = useLocation();
   const [outletVisible, setOutletVisible] = useState(false);
   const outletRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState('dark');
+  const switchTheme = () => {
+    const tangleTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(tangleTheme);
+  };
 
   useEffect(() => {
     setOutletVisible(location.pathname !== '/');
@@ -31,20 +40,29 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="appContainer" onClick={onClick}>
+    <ThemeContext.Provider value={theme}>
       <div
-        className={`mainPage ${outletVisible ? 'shifted' : ''}`}
+        data-testid="app-container"
+        className={`appContainer ${theme} ${outletVisible ? 'shifted' : ''}`}
+        onClick={onClick}
       >
-        <MainPage />
+        <div
+          className={`mainPage ${outletVisible ? 'shifted' : ''}`}
+        >
+          <ThemeCheckbox switchTheme={switchTheme} />
+
+          <MainPage />
+        </div>
+        <div
+          data-testid="outlet"
+          id="outlet"
+          ref={outletRef}
+          className={outletVisible ? 'visible' : 'hidden'}
+        >
+          {outletVisible ? <Outlet /> : null}
+        </div>
       </div>
-      <div
-        id="outlet"
-        ref={outletRef}
-        className={outletVisible ? 'visible' : 'hidden'}
-      >
-        {outletVisible ? <Outlet /> : null}
-      </div>
-    </div>
+    </ThemeContext.Provider>
   );
 };
 

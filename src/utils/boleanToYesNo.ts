@@ -1,8 +1,7 @@
-const booleanToYesNO = (boolean: boolean) => {
-  if (boolean) {
-    return 'Yes';
-  } else {
-    return 'NO';
+const booleanToYesNO = (value: boolean): string => {
+  if (typeof value === 'boolean') {
+    return value ? 'Yes' : 'NO';
   }
+  return 'NO';
 };
 export default booleanToYesNO;

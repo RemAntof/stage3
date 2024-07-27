@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CardProp from '@interfaces/cardProp';
 import booleanToYesNO from '@utils/boleanToYesNo';
 import styles from '@components/cards/card/card.module.css';
+import { ThemeContext } from 'src/App';
 
 const Card: React.FC<CardProp> = (props) => {
+  const theme = useContext(ThemeContext);
   return (
-    <div className={styles.cardBox}>
-      <div className={styles.cardName}>
+    <div className={`${styles.cardBox} cardBox ${theme}`}>
+      <div
+        className={`${styles.cardName} cardName ${theme}`}
+      >
         {props.animal.name}
       </div>
       <div className={styles.cardText}>
