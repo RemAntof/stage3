@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flyout Component matches snapshot when items are present 1`] = `
+<DocumentFragment>
+  <div
+    class="flyoutContainer"
+  >
+    <div
+      class="flyoutContent"
+    >
+      1
+    </div>
+    <button
+      class="closeButton"
+    >
+      Remove All Items
+    </button>
+    <button
+      class="closeButton"
+    >
+      Download
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Flyout Component matches snapshot when no items are present 1`] = `<DocumentFragment />`;

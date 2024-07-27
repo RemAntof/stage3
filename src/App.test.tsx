@@ -1,13 +1,36 @@
-import { render, act } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
-test('renders App component correctly', async () => {
-  await act(async () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    );
-  });
+test('App component snapshot - dark theme, outlet hidden', () => {
+  const { asFragment } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(asFragment()).toMatchSnapshot();
+});
+
+test('App component snapshot - dark theme, outlet visible', () => {
+  const { asFragment } = render(
+    <MemoryRouter initialEntries={['/some-path']}>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(asFragment()).toMatchSnapshot();
+});
+
+test('App component snapshot - light theme, outlet hidden', () => {
+  const { asFragment, getByRole } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+
+  const checkbox = getByRole('checkbox');
+  fireEvent.click(checkbox);
+
+  expect(asFragment()).toMatchSnapshot();
 });

@@ -42,6 +42,7 @@ const App: React.FC = () => {
   return (
     <ThemeContext.Provider value={theme}>
       <div
+        data-testid="app-container"
         className={`appContainer ${theme} ${outletVisible ? 'shifted' : ''}`}
         onClick={onClick}
       >
@@ -53,6 +54,7 @@ const App: React.FC = () => {
           <MainPage />
         </div>
         <div
+          data-testid="outlet"
           id="outlet"
           ref={outletRef}
           className={outletVisible ? 'visible' : 'hidden'}

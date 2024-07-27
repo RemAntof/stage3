@@ -35,7 +35,9 @@ const Search: React.FC<SearchProps> = ({
   };
 
   return (
-    <div className={`${styles.searchContainer} searchBox ${theme}`}>
+    <div
+      className={`${styles.searchContainer} searchBox ${theme}`}
+    >
       <form onSubmit={handleSubmit}>
         <SearchInput
           value={inputData}

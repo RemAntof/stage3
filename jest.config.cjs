@@ -2,6 +2,7 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
+    '^src/(.*)$': '<rootDir>/src/$1',
     '\\.css$': 'identity-obj-proxy',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@views/(.*)$': '<rootDir>/src/views/$1',
