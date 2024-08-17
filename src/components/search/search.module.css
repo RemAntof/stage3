@@ -1,8 +1,0 @@
-.searchContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
