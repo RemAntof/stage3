@@ -1,15 +1,18 @@
 import React from 'react';
-import './App.css';
-import Search from '@components/search/Search';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainView from './pages/Main/mainView';
+import UncontrolledForm from '@components/UncotnrolledForm/UncontrolledForm';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Search />
-      </div>
-    );
-  }
-}
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainView />} />
+        <Route path="/uncontrolled-form" element={<UncontrolledForm />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
