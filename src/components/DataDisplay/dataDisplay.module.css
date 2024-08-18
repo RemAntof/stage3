@@ -1,0 +1,27 @@
+.dataContainer {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  margin: 20px;
+  border: 4px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 20px;
+}
+.imgContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+img {
+  object-fit: contain;
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 4px;
+}
+.dataRow {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}

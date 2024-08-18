@@ -1,0 +1,27 @@
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+  height: 60px;
+  flex-wrap: wrap;
+}
+.inputField {
+  height: 30px;
+  border-radius: 10px;
+  border-color: aliceblue;
+  width: 200px;
+}
+.errorMassage {
+  position: relative;
+  font-size: 12px;
+  color: rgb(190, 0, 0);
+  background-color: gray;
+  padding: 5px;
+  border-radius: 5px;
+  width: 300px;
+}
+.noErrorPadding {
+  padding: 0px;
+}
