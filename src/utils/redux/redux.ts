@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 
-interface FormDataState {
+export interface FormDataState {
   name: string;
   email: string;
   age: number | null;
@@ -36,7 +36,7 @@ const countriesSlice = createSlice({
     'Australia',
     'Poland',
     'Belarus',
-  ], // Add more countries as needed
+  ],
   reducers: {},
 });
 

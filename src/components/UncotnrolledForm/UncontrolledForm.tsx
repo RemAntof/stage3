@@ -66,7 +66,6 @@ const UncontrolledForm: React.FC = () => {
         navigate('/');
       }
       setErrors({});
-      console.log('Success');
     } catch (validationErrors) {
       const newErrors: { [key: string]: string } = {};
       if (validationErrors instanceof yup.ValidationError) {

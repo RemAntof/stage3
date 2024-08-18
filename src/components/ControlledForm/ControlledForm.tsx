@@ -35,18 +35,23 @@ const ControlledForm: React.FC = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64String = reader.result as string;
-      dispatch(
-        saveControlledFormData({
-          ...data,
-          picture: base64String,
-        })
-      );
-      reader.readAsDataURL(data.picture[0]);
-      navigate('/');
-    };
+    if (data.picture && data.picture[0]) {
+      const file = data.picture[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        dispatch(
+          saveControlledFormData({
+            ...data,
+            picture: base64String,
+          })
+        );
+        navigate('/');
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
