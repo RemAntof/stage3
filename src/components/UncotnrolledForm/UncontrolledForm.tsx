@@ -1,12 +1,19 @@
-import validationSchema from '@assets/utils/Validation';
+import validationSchema from '@utils/Validation';
 import Input from '@components/inputsFields/input';
 import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveUncontrolledFormData } from '@utils/redux/redux';
 
 const UncontrolledForm: React.FC = () => {
   const [errors, setErrors] = useState<{
     [key: string]: string;
   }>({});
+
+  const countries = useSelector(
+    (state: { countries: string[] }) => state.countries
+  );
+  const dispatch = useDispatch();
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -41,14 +48,19 @@ const UncontrolledForm: React.FC = () => {
         abortEarly: false,
       });
 
-      //   if (formData.picture) {
-      //     const reader = new FileReader();
-      //     reader.onload = () => {
-      //       const base64String = reader.result as string;
-      //       dispatch(setPicture(base64String));
-      //     };
-      //     reader.readAsDataURL(formData.picture);
-      //   }
+      if (formData.picture) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64String = reader.result as string;
+          dispatch(
+            saveUncontrolledFormData({
+              ...formData,
+              picture: base64String,
+            })
+          );
+        };
+        reader.readAsDataURL(formData.picture);
+      }
 
       setErrors({});
       console.log('Form is valid!', formData);
@@ -118,10 +130,12 @@ const UncontrolledForm: React.FC = () => {
       <div>
         <label htmlFor="country">Country:</label>
         <select id="country" ref={countryRef}>
-          <option value="Poland">Poland</option>
-          <option value="Poland">Poland</option>
-          <option value="Poland">Poland</option>
-          <option value="Poland">Poland</option>
+          <option value="">Select Country</option>
+          {countries.map((country) => (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          ))}
         </select>
         <p>{errors.country}</p>
       </div>
