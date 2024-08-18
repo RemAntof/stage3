@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import MainView from './pages/Main/mainView';
-import UncontrolledForm from '@components/UncotnrolledForm/UncontrolledForm';
+import UncontrolledFormsView from './pages/UncontrolledForms/UncontrolledFormsView';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <Route path="/" element={<MainView />} />
         <Route
           path="/uncontrolled-form"
-          element={<UncontrolledForm />}
+          element={<UncontrolledFormsView />}
         />
       </Routes>
     </Router>

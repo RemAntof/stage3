@@ -1,3 +1,4 @@
+import styles from './input.module.css';
 interface Props {
   labelName: string;
   labelHtmlFor: string;
@@ -14,15 +15,24 @@ const Input: React.FC<Props> = ({
   error,
 }) => {
   return (
-    <div>
+    <div className={styles.inputContainer}>
       <label htmlFor={labelHtmlFor}>{labelName}:</label>
       <input
         type={inputType}
         id={labelHtmlFor}
         ref={refName}
         placeholder={`*Enter ${labelName}`}
+        className={styles.inputField}
       />
-      <p>{error}</p>
+      <p
+        className={
+          error
+            ? styles.errorMassage
+            : styles.noErrorPadding
+        }
+      >
+        {error}
+      </p>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUncontrolledFormData } from '@utils/redux/redux';
 import { useNavigate } from 'react-router-dom';
+import styles from '../inputsFields/input.module.css';
 
 const UncontrolledForm: React.FC = () => {
   const [errors, setErrors] = useState<{
@@ -119,7 +120,7 @@ const UncontrolledForm: React.FC = () => {
         refName={confirmPasswordRef}
         error={errors.confirmPassword}
       />
-      <div>
+      <div className={styles.inputContainer}>
         <label htmlFor="gender">Gender:</label>
         <select id="gender" ref={genderRef}>
           <option value="">Select Gender</option>
@@ -127,10 +128,18 @@ const UncontrolledForm: React.FC = () => {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
-        <p>{errors.gender}</p>
+        <p
+          className={
+            errors.gender
+              ? styles.errorMassage
+              : styles.noErrorPadding
+          }
+        >
+          {errors.gender}
+        </p>
       </div>
 
-      <div>
+      <div className={styles.inputContainer}>
         <label htmlFor="country">Country:</label>
         <select id="country" ref={countryRef}>
           <option value="">Select Country</option>
@@ -140,7 +149,15 @@ const UncontrolledForm: React.FC = () => {
             </option>
           ))}
         </select>
-        <p>{errors.country}</p>
+        <p
+          className={
+            errors.country
+              ? styles.errorMassage
+              : styles.noErrorPadding
+          }
+        >
+          {errors.country}
+        </p>
       </div>
 
       <Input
@@ -151,7 +168,7 @@ const UncontrolledForm: React.FC = () => {
         error={errors.terms}
       />
 
-      <div>
+      <div className={styles.inputContainer}>
         <label htmlFor="picture">Upload Picture:</label>
         <input
           type="file"
@@ -159,7 +176,15 @@ const UncontrolledForm: React.FC = () => {
           ref={pictureRef}
           accept="image/jpeg, image/png"
         />
-        <p>{errors.picture}</p>
+        <p
+          className={
+            errors.picture
+              ? styles.errorMassage
+              : styles.noErrorPadding
+          }
+        >
+          {errors.picture}
+        </p>
       </div>
 
       <button type="submit">Submit</button>
