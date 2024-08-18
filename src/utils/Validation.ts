@@ -35,24 +35,30 @@ const validationSchema = yup.object().shape({
     ),
   picture: yup
     .mixed()
-    .test(
-      'fileType',
-      'Invalid file type',
-      (value: File | null) => {
-        if (!value) return false;
-        const allowedTypes = ['image/jpeg', 'image/png'];
-        return allowedTypes.includes(value.type);
+    .test('fileType', 'Invalid file type', (value) => {
+      if (!value) return true;
+      if (value instanceof FileList) {
+        const file = value[0];
+        if (file) {
+          return ['image/jpeg', 'image/png'].includes(
+            file.type
+          );
+        }
+        return false;
       }
-    )
-    .test(
-      'fileSize',
-      'File too large',
-      (value: File | null) => {
-        return value
-          ? value.size <= 2 * 1024 * 1024
-          : false; // 2MB
+      return true;
+    })
+    .test('fileSize', 'File too large', (value) => {
+      if (!value) return true;
+      if (value instanceof FileList) {
+        const file = value[0];
+        if (file) {
+          return file.size <= 2 * 1024 * 1024;
+        }
+        return false;
       }
-    ),
+      return true;
+    }),
   country: yup
     .string()
     .required('Please select your country'),

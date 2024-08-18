@@ -45,7 +45,6 @@ const UncontrolledForm: React.FC = () => {
       picture: pictureRef.current?.files?.[0] || null,
       country: countryRef.current?.value,
     };
-    console.log(formData);
 
     try {
       await validationSchema.validate(formData, {

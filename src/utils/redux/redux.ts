@@ -53,13 +53,29 @@ const uncontrolledFormDataSlice = createSlice({
   },
 });
 
+const controlledFormDataSlice = createSlice({
+  name: 'formData',
+  initialState,
+  reducers: {
+    saveControlledFormData: (
+      state,
+      action: PayloadAction<FormDataState>
+    ) => {
+      return { ...state, ...action.payload };
+    },
+  },
+});
+
 export const { saveUncontrolledFormData } =
   uncontrolledFormDataSlice.actions;
+export const { saveControlledFormData } =
+  controlledFormDataSlice.actions;
 
 const store = configureStore({
   reducer: {
     countries: countriesSlice.reducer,
     uncontrolledFormData: uncontrolledFormDataSlice.reducer,
+    controlledFormData: controlledFormDataSlice.reducer,
   },
 });
 
