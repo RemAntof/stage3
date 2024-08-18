@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUncontrolledFormData } from '@utils/redux/redux';
+import { useNavigate } from 'react-router-dom';
 
 const UncontrolledForm: React.FC = () => {
   const [errors, setErrors] = useState<{
@@ -14,6 +15,8 @@ const UncontrolledForm: React.FC = () => {
     (state: { countries: string[] }) => state.countries
   );
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -60,10 +63,10 @@ const UncontrolledForm: React.FC = () => {
           );
         };
         reader.readAsDataURL(formData.picture);
+        navigate('/');
       }
-
       setErrors({});
-      console.log('Form is valid!', formData);
+      console.log('Success');
     } catch (validationErrors) {
       const newErrors: { [key: string]: string } = {};
       if (validationErrors instanceof yup.ValidationError) {
