@@ -4,10 +4,11 @@ import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
 
 const UncontrolledForm: React.FC = () => {
+  const [errors, setErrors] = useState<{
+    [key: string]: string;
+  }>({});
 
-const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
- const nameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -17,14 +18,15 @@ const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const pictureRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<HTMLSelectElement>(null);
 
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const formData = {
       name: nameRef.current?.value,
       email: emailRef.current?.value,
-      age: ageRef.current?.value ? parseInt(ageRef.current?.value) : null,
+      age: ageRef.current?.value
+        ? parseInt(ageRef.current?.value)
+        : null,
       password: passwordRef.current?.value,
       confirmPassword: confirmPasswordRef.current?.value,
       gender: genderRef.current?.value,
@@ -32,19 +34,21 @@ const [errors, setErrors] = useState<{ [key: string]: string }>({});
       picture: pictureRef.current?.files?.[0] || null,
       country: countryRef.current?.value,
     };
-    console.log(formData)
+    console.log(formData);
 
     try {
-      await validationSchema.validate(formData, { abortEarly: false });
+      await validationSchema.validate(formData, {
+        abortEarly: false,
+      });
 
-    //   if (formData.picture) {
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       const base64String = reader.result as string;
-    //       dispatch(setPicture(base64String));
-    //     };
-    //     reader.readAsDataURL(formData.picture);
-    //   }
+      //   if (formData.picture) {
+      //     const reader = new FileReader();
+      //     reader.onload = () => {
+      //       const base64String = reader.result as string;
+      //       dispatch(setPicture(base64String));
+      //     };
+      //     reader.readAsDataURL(formData.picture);
+      //   }
 
       setErrors({});
       console.log('Form is valid!', formData);
@@ -62,44 +66,44 @@ const [errors, setErrors] = useState<{ [key: string]: string }>({});
   };
 
   return (
-     <form onSubmit={handleSubmit}>
-        <Input
-        labelName='Name'
-        labelHtmlFor='name'
-        inputType='text'
+    <form onSubmit={handleSubmit}>
+      <Input
+        labelName="Name"
+        labelHtmlFor="name"
+        inputType="text"
         refName={nameRef}
         error={errors.name}
-        />
-             <Input
-        labelName='Email'
-        labelHtmlFor='email'
-        inputType='email'
+      />
+      <Input
+        labelName="Email"
+        labelHtmlFor="email"
+        inputType="email"
         refName={emailRef}
         error={errors.email}
-        />
+      />
 
-                     <Input
-        labelName='Age'
-        labelHtmlFor='age'
-        inputType='number'
+      <Input
+        labelName="Age"
+        labelHtmlFor="age"
+        inputType="number"
         refName={ageRef}
         error={errors.age}
-        />
-                             <Input
-        labelName='Password'
-        labelHtmlFor='password'
-        inputType='password'
+      />
+      <Input
+        labelName="Password"
+        labelHtmlFor="password"
+        inputType="password"
         refName={passwordRef}
         error={errors.password}
-        />
+      />
 
-                                     <Input
-        labelName='Confirm Password'
-        labelHtmlFor='confirmPassword'
-        inputType='password'
+      <Input
+        labelName="Confirm Password"
+        labelHtmlFor="confirmPassword"
+        inputType="password"
         refName={confirmPasswordRef}
         error={errors.confirmPassword}
-        />
+      />
       <div>
         <label htmlFor="gender">Gender:</label>
         <select id="gender" ref={genderRef}>
@@ -122,18 +126,23 @@ const [errors, setErrors] = useState<{ [key: string]: string }>({});
         <p>{errors.country}</p>
       </div>
 
-                                           <Input
-        labelName='Accept Terms and Conditions'
-        labelHtmlFor='terms'
-        inputType='checkbox'
+      <Input
+        labelName="Accept Terms and Conditions"
+        labelHtmlFor="terms"
+        inputType="checkbox"
         refName={termsRef}
         error={errors.terms}
-        />
+      />
 
       <div>
         <label htmlFor="picture">Upload Picture:</label>
-        <input type="file" id="picture" ref={pictureRef} accept="image/jpeg, image/png" />
-       <p>{errors.picture}</p>
+        <input
+          type="file"
+          id="picture"
+          ref={pictureRef}
+          accept="image/jpeg, image/png"
+        />
+        <p>{errors.picture}</p>
       </div>
 
       <button type="submit">Submit</button>

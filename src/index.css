@@ -12,12 +12,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-      width: calc(100% - 80px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 40px;
-
+  width: calc(100% - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
 }
 
 a {
